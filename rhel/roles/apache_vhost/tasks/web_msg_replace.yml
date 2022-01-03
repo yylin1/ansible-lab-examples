@@ -1,0 +1,12 @@
+- name: Report variables
+  hosts: node1
+  tasks:
+    - copy:
+        src: ./files/web.html
+        dest: ./files/web_new.html
+    - lineinfile:
+        path: ./files/web_new.html
+        regexp: "^{{item.key}}"
+        line: "{{item.key}}:{{item.value}}"
+      loop:
+      - { key: "Frank said:", value: "{{inventory_hostname}}" }

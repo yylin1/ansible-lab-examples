@@ -1,0 +1,15 @@
+---
+- name: Check URL results
+  hosts: node1
+  vars:
+    node: "node1"
+
+  tasks:
+    - name: Check that you can connect (GET) to a page and it returns a status 200
+      uri:
+        url: "http://{{ node }}"
+        return_content: yes
+      register: content
+
+    - debug:
+       var: content.content
